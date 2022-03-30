@@ -560,3 +560,33 @@ def django_version_is_gte_32x():
     for s in arrays:
         version.append(int(s))
     return tuple(version) >= (3, 2)
+
+
+@register.simple_tag(takes_context=True)
+def field_button(context):
+    admin = context.get('adminform').model_admin
+    data = {}
+    for i, name in enumerate(admin.button_fields):
+        func = getattr(admin, name)
+        values = {}
+        for key, v in func.__dict__.items():
+            if key != '__len__' and key != '__wrapped__':
+                values[key] = v
+        values['eid'] = i
+        data[name] = values
+    return json.dumps(data, cls=LazyEncoder)
+
+
+@register.filter
+def is_button_field(name, button_fields):
+    return name in button_fields
+
+
+@register.simple_tag(takes_context=True)
+def get_object_ajax_url(context):
+    opts = context.get("opts")
+    key = "admin:{}_{}_change_ajax".format(opts.app_label, opts.model_name)
+    try:
+        return reverse(key, args=[context.get('object_id')])
+    except:
+        pass

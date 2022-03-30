@@ -13,10 +13,24 @@
                     {% if field.is_checkbox %}
                         {{ field.field }}{{ field.label_tag }}
                     {% else %}
-                        {{ field.label_tag }}
                         {% if field.is_readonly %}
-                            <div class="readonly">{{ field.contents }}</div>
+                            {% if field.field.name|is_button_field:field.model_admin.button_fields %}
+                                 <el-button v-if="fieldButton.{{ field.field.name }}.layer" size="small"
+                                   :eid="fieldButton.{{ field.field.name }}.eid"
+                                   :icon="fieldButton.{{ field.field.name }}.icon" :style="fieldButton.{{ field.field.name }}.style"
+                                   :type="fieldButton.{{ field.field.name }}.type" data-name="{{ field.field.name }}">{{ field.field.label }}
+                                 </el-button>
+                                 <el-button v-else size="small" :eid="fieldButton.{{ field.field.name }}.eid"
+                                   :icon="fieldButton.{{ field.field.name }}.icon" :style="fieldButton.{{ field.field.name }}.style"
+                                   :confirm="fieldButton.{{ field.field.name }}.confirm"
+                                   :type="fieldButton.{{ field.field.name }}.type" data-name="{{ field.field.name }}">{{ field.field.label }}
+                                 </el-button>
+                             {% else %}
+                                 {{ field.label_tag }}
+                                 <div class="readonly">{{ field.contents }}</div>
+                             {% endif %}
                         {% else %}
+                            {{ field.label_tag }}
                             {{ field.field|get_value }}
                         {% endif %}
                     {% endif %}

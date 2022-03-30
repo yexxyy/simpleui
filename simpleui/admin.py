@@ -1,7 +1,6 @@
 import json
-import logging
 import traceback
-
+from functools import update_wrapper
 from django.contrib import admin
 from django.db.models import Q
 from django.http import JsonResponse
@@ -62,6 +61,20 @@ class AjaxAdmin(admin.ModelAdmin):
 
             return func(self, request, queryset)
 
+    def field_button_callback(self, request, pk):
+        """
+        This method is used to handle ajax requests.
+        """
+        post = request.POST
+        button = post.get("field_button")
+        if button and hasattr(self, button):
+            func = getattr(self, button)
+            try:
+                obj = self.model.objects.get(pk=pk)
+            except Exception:
+                return JsonResponse(msg='对象不存在', status='error')
+            return func(request, obj)
+
     def get_layer(self, request):
         """
         This method is used to get the layer of the admin interface.
@@ -79,9 +92,18 @@ class AjaxAdmin(admin.ModelAdmin):
         """
         This method is used to add ajax functionality to the admin interface.
         """
+
+        def wrap(view):
+            def wrapper(*args, **kwargs):
+                return self.admin_site.admin_view(view)(*args, **kwargs)
+
+            wrapper.model_admin = self
+            return update_wrapper(wrapper, view)
+
         info = self.model._meta.app_label, self.model._meta.model_name
 
-        return super().get_urls() + [
-            path("ajax", self.callback, name="%s_%s_ajax" % info),
-            path("layer", self.get_layer, name="%s_%s_layer" % info)
-        ]
+        return [
+                   path("ajax", self.callback, name="%s_%s_ajax" % info),
+                   path("layer", self.get_layer, name="%s_%s_layer" % info),
+                   path("<path:pk>/ajax/", wrap(self.field_button_callback), name="%s_%s_change_ajax" % info),
+               ] + super().get_urls()

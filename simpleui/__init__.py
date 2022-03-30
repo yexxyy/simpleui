@@ -1,5 +1,5 @@
 default_app_config = 'simpleui.apps.SimpleApp'
-
+import datetime
 
 def get_version():
-    return '2022.3.15'
+    return datetime.datetime.now().strftime('%Y.%m.%d')

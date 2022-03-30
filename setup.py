@@ -15,7 +15,7 @@ else:
     ])
 
 setup(
-    name='django-simpleui',
+    name='django-simpleui-dev',
     version=simpleui.get_version(),
     packages=['simpleui'],
     zip_safe=False,
