@@ -565,6 +565,8 @@ def django_version_is_gte_32x():
 @register.simple_tag(takes_context=True)
 def field_button(context):
     admin = context.get('adminform').model_admin
+    if not hasattr(admin, 'button_fields'):
+        return json.dumps({}, cls=LazyEncoder)
     data = {}
     for i, name in enumerate(admin.button_fields):
         func = getattr(admin, name)
