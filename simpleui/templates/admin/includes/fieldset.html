@@ -15,6 +15,7 @@
                     {% else %}
                         {% if field.is_readonly %}
                             {% if field.field.name|is_button_field:field.model_admin.button_fields %}
+                               <div class="readonly">
                                  <el-button v-if="fieldButton.{{ field.field.name }}.layer" size="small"
                                    :eid="fieldButton.{{ field.field.name }}.eid"
                                    :icon="fieldButton.{{ field.field.name }}.icon" :style="fieldButton.{{ field.field.name }}.style"
@@ -25,6 +26,7 @@
                                    :confirm="fieldButton.{{ field.field.name }}.confirm"
                                    :type="fieldButton.{{ field.field.name }}.type" data-name="{{ field.field.name }}">{{ field.field.label }}
                                  </el-button>
+                               </div>
                              {% else %}
                                  {{ field.label_tag }}
                                  <div class="readonly">{{ field.contents }}</div>
