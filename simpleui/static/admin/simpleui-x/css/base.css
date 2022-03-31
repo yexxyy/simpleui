@@ -206,7 +206,7 @@ body,
     --link-selected-fg: #FFF;
     --hairline-color: inherit;
     --border-color: #ccc;
-    --error-fg: inherit;
+    --error-fg: #ba2121;
     --message-success-bg: inherit;
     --message-warning-bg: inherit;
     --message-error-bg: inherit;
@@ -217,4 +217,3 @@ body,
     --close-button-hover-bg: inherit;
   }
 }
-/*# sourceMappingURL=base.css.map */
