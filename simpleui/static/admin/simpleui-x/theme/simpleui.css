@@ -1,23 +1,23 @@
 .el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-  color: #417690 !important;
-  border-bottom: #417690 2px solid !important;
+  color: #486586 !important;
+  border-bottom: #486586 2px solid !important;
 }
 .el-button--text {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .el-button--primary:focus,
 .el-button--primary:hover {
   color: white;
-  border-color: rgba(65, 118, 144, 0.9) !important;
-  background-color: rgba(65, 118, 144, 0.8) !important;
+  border-color: rgba(72, 101, 134, 0.9) !important;
+  background-color: rgba(72, 101, 134, 0.8) !important;
 }
 .el-dropdown-menu__item:focus,
 .el-dropdown-menu__item:not(.is-disabled):hover {
-  background-color: rgba(65, 118, 144, 0.2) !important;
-  color: #417690 !important;
+  background-color: rgba(72, 101, 134, 0.2) !important;
+  color: #486586 !important;
 }
 .el-select-dropdown__item.selected {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 input[type=text]:focus,
 input[type=password]:focus,
@@ -28,73 +28,73 @@ input[type=tel]:focus,
 textarea:focus,
 select:focus,
 .vTextField:focus {
-  border-color: #417690 !important;
+  border-color: #486586 !important;
 }
 .el-button--primary {
-  background-color: #417690 !important;
-  border-color: #417690 !important;
+  background-color: #486586 !important;
+  border-color: #486586 !important;
 }
 tbody a:link,
 tbody a:visited {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 tbody tr:hover td,
 tbody tr:hover th {
-  background-color: rgba(65, 118, 144, 0.2) !important;
+  background-color: rgba(72, 101, 134, 0.2) !important;
 }
 a:link,
 a:visited {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .results {
   color: inherit !important;
 }
 .el-select-dropdown__item.hover,
 .el-select-dropdown__item:hover {
-  background-color: rgba(65, 118, 144, 0.2) !important;
+  background-color: rgba(72, 101, 134, 0.2) !important;
 }
 .el-date-table td.today span {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .el-date-table td.available:hover {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .el-picker-panel__icon-btn:hover {
-  color: rgba(65, 118, 144, 0.8) !important;
+  color: rgba(72, 101, 134, 0.8) !important;
 }
 .el-range-editor.is-active,
 .el-range-editor.is-active:hover {
-  border-color: #417690 !important;
+  border-color: #486586 !important;
 }
 .el-date-table td.end-date span,
 .el-date-table td.start-date span {
-  background-color: #417690 !important;
+  background-color: #486586 !important;
 }
 .el-date-table td.in-range div,
 .el-date-table td.in-range div:hover,
 .el-date-table.is-week-mode .el-date-table__row.current div,
 .el-date-table.is-week-mode .el-date-table__row:hover div {
-  background-color: rgba(65, 118, 144, 0.2) !important;
+  background-color: rgba(72, 101, 134, 0.2) !important;
 }
 .el-time-panel__btn.confirm {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .el-pagination.is-background .el-pager li:not(.disabled).active {
   color: white;
-  background-color: #417690 !important;
+  background-color: #486586 !important;
 }
 .el-pagination.is-background .el-pager li:not(.disabled):hover {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .el-tabs--border-card > .el-tabs__header .el-tabs__item:not(.is-disabled):hover {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .navbar {
   background-color: #fff;
 }
 .navbar .el-button:focus,
 .navbar .el-button:hover {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .navbar .el-button,
 .navbar .el-breadcrumb__item:last-child .el-breadcrumb__inner,
@@ -120,14 +120,14 @@ a:visited {
   color: #FFF;
 }
 .menu .el-menu .is-active {
-  color: #417690 !important;
+  color: #486586 !important;
 }
 .menu .el-menu-item-group,
 .menu .el-menu-item {
   background-color: #2c2e39 !important;
 }
 .menu .el-menu-item:hover {
-  background-color: #417690 !important;
+  background-color: #486586 !important;
   color: #FFF !important;
 }
 .menu .el-menu-item i {
@@ -152,7 +152,7 @@ a:visited {
   background-color: #35353e !important;
 }
 .quick-card a:hover {
-  color: rgba(65, 118, 144, 0.8) !important;
+  color: rgba(72, 101, 134, 0.8) !important;
 }
 .module h2,
 .module caption,
@@ -172,5 +172,5 @@ a:visited {
 /*菜单背景*/
 .menu .el-menu .is-active {
   color: #FFF !important;
-  background-color: #417690 !important;
+  background-color: #486586 !important;
 }
