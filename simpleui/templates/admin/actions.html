@@ -102,7 +102,7 @@
             <el-form-item v-for="item in params" :label="item.label"
                           :rules="[{ required: item.require||false, trigger: 'blur' }]">
                 <el-select v-if="item.type=='select'" :style="{width:item.width}" :size="item.size"
-                           v-model="item.value">
+                           v-model="item.value" clearable>
                     <el-option
                             v-for="node in item.options"
                             :key="node.key"
@@ -183,7 +183,7 @@
                 <input v-else-if="item.type=='file'" type="file" :ref="item.key"/>
 
                 <el-input v-else v-model="item.value" :type="item.type" :style="{width:item.width}"
-                          :size="item.size"></el-input>
+                          :size="item.size" clearable></el-input>
             </el-form-item>
         </el-form>
 
