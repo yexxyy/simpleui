@@ -244,16 +244,32 @@
                     }
                 }
 
-                axios.post('{% get_model_ajax_url %}'+window.location.search, data).then(res => {
-                    if (res.data.status == 'success') {
+                const isDownloadAction = self.action.search('_download') !== -1
+                var responseType = isDownloadAction ? {responseType: 'blob'} : {}
+
+                axios.post('{% get_model_ajax_url %}'+ window.location.search, data, responseType).then(res => {
+                    if (isDownloadAction) {
+                        var blob = new Blob([res.data]); 
+                        var a = document.createElement('a');
+                        a.style.display = 'none'
+                        a.href = window.URL.createObjectURL(blob);
+                        var filename = res.headers['content-disposition'].split('=')[1];
+                        a.download = decodeURI(filename).replace("utf-8''", '').replaceAll('"', '')
+                        document.body.appendChild(a)
+                        a.click(); 
+                        document.body.removeChild(a)  
                         self.visible = false;
-                        //1.5s 后刷新
-                        setTimeout(() => window.location.reload(), 1000);
+                    } else {
+                        if (res.data.status == 'success') {
+                            self.visible = false;
+                            //1.5s 后刷新
+                            setTimeout(() => window.location.reload(), 1000);
+                        }
+                        self.$message({
+                            message: res.data.msg,
+                            type: res.data.status
+                        });
                     }
-                    self.$message({
-                        message: res.data.msg,
-                        type: res.data.status
-                    });
                 }).catch(err => self.$message.error(err));
             }
         }
