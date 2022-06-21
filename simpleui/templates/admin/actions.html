@@ -116,7 +116,8 @@
                         :style="{width:item.width}"
                         :size="item.size"
                         v-model="item.value"
-                        type="date">
+                        type="date"
+                        value-format="yyyy-MM-dd">
                 </el-date-picker>
 
                 <el-date-picker
@@ -124,7 +125,8 @@
                         :style="{width:item.width}"
                         :size="item.size"
                         v-model="item.value"
-                        type="datetime">
+                        type="datetime"
+                        value-format="yyyy-MM-dd HH:mm:ss">
                 </el-date-picker>
 
                 <el-rate
