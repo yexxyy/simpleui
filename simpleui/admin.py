@@ -29,7 +29,10 @@ class AjaxAdmin(admin.ModelAdmin):
                     obj = self.model.objects.get(pk=obj_id)
                 except Exception:
                     return JsonResponse(msg='对象不存在', status='error')
-                return func(request, obj)
+                try:
+                    return func(request, obj)
+                except Exception as e:
+                    return JsonResponse(msg=str(e), status='error')
                     
             func, action, description = self.get_action(action)
             # 这里的queryset 会有数据过滤，只包含选中的数据
@@ -67,8 +70,11 @@ class AjaxAdmin(admin.ModelAdmin):
                         filter_value = json.loads(_filter)
                         queryset = queryset.filter(**filter_value)
 
-            return func(self, request, queryset)
-
+            try:
+                return func(self, request, queryset)
+            except Exception as e:
+                    return JsonResponse(msg=str(e), status='error')
+                
     def field_button_callback(self, request, pk):
         """
         This method is used to handle ajax requests.
@@ -81,7 +87,10 @@ class AjaxAdmin(admin.ModelAdmin):
                 obj = self.model.objects.get(pk=pk)
             except Exception:
                 return JsonResponse(msg='对象不存在', status='error')
-            return func(request, obj)
+            try:
+                return func(request, obj)
+            except Exception as e:
+                    return JsonResponse(msg=str(e), status='error')
 
     def get_layer(self, request):
         """
