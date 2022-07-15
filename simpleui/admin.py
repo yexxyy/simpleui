@@ -29,8 +29,9 @@ class AjaxAdmin(admin.ModelAdmin):
                     obj = self.model.objects.get(pk=obj_id)
                 except Exception:
                     return JsonResponse({'msg': '对象不存在', 'status': 'error'})
+                dispaly_list_func = getattr(self, action)
                 try:
-                    return func(request, obj)
+                    return dispaly_list_func(request, obj)
                 except Exception as e:
                     return JsonResponse({'msg': str(e), 'status': 'error'})
                     
