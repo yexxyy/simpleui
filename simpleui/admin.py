@@ -20,9 +20,17 @@ class AjaxAdmin(admin.ModelAdmin):
         action = post.get("_action")
         selected = post.get("_selected")
         select_across = post.get("select_across")
-
+        obj_id = post.get("obj_id")
+        
         # call admin
         if hasattr(self, action):
+            if obj_id:
+                try:
+                    obj = self.model.objects.get(pk=obj_id)
+                except Exception:
+                    return JsonResponse(msg='对象不存在', status='error')
+                return func(request, obj)
+                    
             func, action, description = self.get_action(action)
             # 这里的queryset 会有数据过滤，只包含选中的数据
             queryset = self.get_changelist_instance(request).get_queryset(request)
