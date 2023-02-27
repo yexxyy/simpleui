@@ -11,6 +11,7 @@ class AjaxAdmin(admin.ModelAdmin):
     """
     This class is used to add ajax functionality to the admin interface.
     """
+    pk_type = None
 
     def callback(self, request):
         """
@@ -21,11 +22,13 @@ class AjaxAdmin(admin.ModelAdmin):
         selected = post.get("_selected")
         select_across = post.get("select_across")
         obj_id = post.get("obj_id")
-        
+
         # call admin
         if hasattr(self, action):
             if obj_id:
                 try:
+                    if self.pk_type:
+                        obj_id = self.pk_type(obj_id)
                     obj = self.model.objects.get(pk=obj_id)
                 except Exception:
                     return JsonResponse({'msg': '对象不存在', 'status': 'error'})
@@ -34,7 +37,7 @@ class AjaxAdmin(admin.ModelAdmin):
                     return dispaly_list_func(request, obj)
                 except Exception as e:
                     return JsonResponse({'msg': str(e), 'status': 'error'})
-                    
+
             func, action, description = self.get_action(action)
             # 这里的queryset 会有数据过滤，只包含选中的数据
             queryset = self.get_changelist_instance(request).get_queryset(request)
@@ -75,7 +78,7 @@ class AjaxAdmin(admin.ModelAdmin):
                 return func(self, request, queryset)
             except Exception as e:
                 return JsonResponse({'msg': str(e), 'status': 'error'})
-                
+
     def field_button_callback(self, request, pk):
         """
         This method is used to handle ajax requests.
