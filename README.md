@@ -224,3 +224,10 @@ simpleui的发展离不开以下优秀贡献者的支持。如果您想为simple
 
 # 致谢
 开发工具由[Jetbrains](https://www.jetbrains.com/)赞助的Pycharm
+
+# 打包上传
+```
+python3.8 -m build
+twine upload dist/*
+twine upload --skip-existing dist/*
+```
