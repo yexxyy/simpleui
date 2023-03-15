@@ -1,18 +1,13 @@
 import json
-import numpy as np
 import traceback
-from django.contrib import admin, admin, messages
+from functools import update_wrapper
+from django.contrib import admin, messages
 from django.contrib.admin import helpers
-from django.core.serializers.json import DjangoJSONEncoder
-from django.db import models
 from django.db.models import Q
-from django.http import JsonResponse, JsonResponse, HttpResponseNotAllowed, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.http.response import HttpResponseBase
 from django.urls import path
-from django.utils.log import log_response
 from django.utils.translation import gettext as _
-from djongo.models import ObjectIdField
-from functools import update_wrapper, wraps
 
 
 class MyAdmin(admin.ModelAdmin):
@@ -124,6 +119,7 @@ class AjaxAdmin(MyAdmin):
                 try:
                     return dispaly_list_func(request, obj)
                 except Exception as e:
+                    print(f'{e}\n{traceback.format_exc()}')
                     return JsonResponse({'msg': str(e), 'status': 'error'})
 
             func, action, description = self.get_action(action)
