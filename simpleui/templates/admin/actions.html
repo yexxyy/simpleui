@@ -232,13 +232,18 @@
                 data.append('_action', self.action);
                 // list_display 中的按钮需要传递当前obj_id
                 data.append('obj_id', self.obj_id);
+
+                //获取选中的数据
                 let selecteds = [];
                 $("#result_list .selected input[name='_selected_action']").each((index, item) => selecteds.push(item.value));
                 data.append('_selected', selecteds.join(','));
-                data.append('select_across',document.querySelector("input[name='select_across']").value)
-                //获取选中的数据
+                let select_across = document.querySelector("input[name='select_across']")
+                if (select_across) {
+                    data.append('select_across', select_across.value)
+                }
 
                 data.append('csrfmiddlewaretoken', document.querySelector('[name="csrfmiddlewaretoken"]').value);
+
                 for (let key in self.params) {
                     let item = self.params[key];
                     if (item.type === "file") {
