@@ -208,7 +208,7 @@ class AjaxAdmin(MyAdmin):
         info = self.model._meta.app_label, self.model._meta.model_name
 
         return [
-                   path("ajax", self.callback, name="%s_%s_ajax" % info),
-                   path("layer", self.get_layer, name="%s_%s_layer" % info),
+                   path("ajax", wrap(self.callback), name="%s_%s_ajax" % info),
+                   path("layer", wrap(self.get_layer), name="%s_%s_layer" % info),
                    path("<path:pk>/ajax/", wrap(self.field_button_callback), name="%s_%s_change_ajax" % info),
                ] + super().get_urls()
